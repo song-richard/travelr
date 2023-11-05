@@ -1,10 +1,13 @@
 
 // openWeather Query Selectors
-let currentWeatherDiv = document.querySelector('#currentWeather')
+let currentCityDiv = document.querySelector(`#currentCityDiv`)
+let currentTempDiv = document.querySelector('#currentTempDiv')
+let currentWeatherStatusDiv = document.querySelector('#currentWeatherStatusDiv')
+
 
 let openWeatherApiKey = "8a9b986776d2999e3580193c86a5744c"
-let lat = ""
-let lon = ""
+let lat = "34.073334"
+let lon = "-118.027496"
 let inputtedCity = "El Monte"
 let findLatLongUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${inputtedCity}&appid=${openWeatherApiKey}`
 
@@ -30,13 +33,20 @@ async function latLongApi() {
 
 latLongApi()
 
+
 async function getWeather() {
     let getWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${openWeatherApiKey}&units=imperial`
     let response = await fetch(getWeatherUrl)
     try {
         if (response.ok) {
             let data = await response.json();
-            console.log(data)
+            let currentCity = data["city"]["name"]
+            let currentTemperature = data["list"][0]["main"]["temp"]
+            let currentWeather = data["list"][0]["weather"][0]["description"]
+            currentCityDiv.textContent = `City: ${currentCity}`
+            currentTempDiv.textContent = `Current Temperature: ${currentTemperature}F`
+            currentWeatherStatusDiv.textContent = `Status: ${currentWeather}`
+            console.log(currentCity)
         }
     } catch (err) {
         console.log(err)
@@ -62,6 +72,6 @@ async function getEvents() {
     }
 }
 
-getEvents()
+// getEvents()
 
 // -----------------END TicketMaster API-------------------
