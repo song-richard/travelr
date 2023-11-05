@@ -1,4 +1,7 @@
 
+// openWeather Query Selectors
+let currentWeatherDiv = document.querySelector('#currentWeather')
+
 let openWeatherApiKey = "8a9b986776d2999e3580193c86a5744c"
 let lat = ""
 let lon = ""
@@ -40,8 +43,25 @@ async function getWeather() {
     }
 }
 
+// -----------------END openWeather API-------------------
 
+let ticketMasterApiKey = "SGU2gyci9kgPhW35MA8NlejLs92Z4EM4"
+let city = "El Monte"
 
+async function getEvents() {
+    let ticketMasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=5&apikey=${ticketMasterApiKey}&city=$Seattle`
+    try {
+        let response = await fetch(ticketMasterUrl);
 
+        if (response.ok) {
+            let data = (await response.json())
+            console.log(data["_embedded"]["events"])
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
 
+getEvents()
 
+// -----------------END TicketMaster API-------------------
