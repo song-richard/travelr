@@ -31,7 +31,7 @@ async function latLongApi() {
     }
 }
 
-latLongApi()
+// latLongApi()
 
 
 async function getWeather() {
@@ -75,3 +75,31 @@ async function getEvents() {
 // getEvents()
 
 // -----------------END TicketMaster API-------------------
+
+let fetchedRestaurantNames = [];
+
+async function getRestaurants() {
+    const url = 'https://restaurants-near-me-usa.p.rapidapi.com/restaurants/location/state/MI/city/West%20Bloomfield/0';
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': 'b7633d815emsh3230d09d00cd30bp130f8fjsnd43c8fffa537',
+		'X-RapidAPI-Host': 'restaurants-near-me-usa.p.rapidapi.com'
+	}
+};
+
+try {
+	const response = await fetch(url, options);
+	const result = await response.json();
+	let data = result["restaurants"]["restarantName"]
+    result.restaurants.forEach(restaurantz => {
+        const restarantName = restaurantz["restaurantName"];
+        fetchedRestaurantNames.push(restarantName);
+    })
+} catch (error) {
+	console.error(error);
+}
+}
+
+getRestaurants()
+console.log(fetchedRestaurantNames)
