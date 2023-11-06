@@ -79,26 +79,33 @@ async function getEvents() {
 let fetchedRestaurantNames = [];
 
 async function getRestaurants() {
+    let restaurantListDivUL = document.querySelector('#restaurantList')
     const url = 'https://restaurants-near-me-usa.p.rapidapi.com/restaurants/location/state/MI/city/West%20Bloomfield/0';
-const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': 'b7633d815emsh3230d09d00cd30bp130f8fjsnd43c8fffa537',
-		'X-RapidAPI-Host': 'restaurants-near-me-usa.p.rapidapi.com'
-	}
-};
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': 'b7633d815emsh3230d09d00cd30bp130f8fjsnd43c8fffa537',
+            'X-RapidAPI-Host': 'restaurants-near-me-usa.p.rapidapi.com'
+        }
+    };
 
-try {
-	const response = await fetch(url, options);
-	const result = await response.json();
-	let data = result["restaurants"]["restarantName"]
-    result.restaurants.forEach(restaurantz => {
-        const restarantName = restaurantz["restaurantName"];
-        fetchedRestaurantNames.push(restarantName);
-    })
-} catch (error) {
-	console.error(error);
-}
+    try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        let data = result["restaurants"]["restarantName"]
+        result.restaurants.forEach(restaurantz => {
+            const restarantName = restaurantz["restaurantName"];
+            fetchedRestaurantNames.push(restarantName);
+        })
+        fetchedRestaurantNames.forEach(restaurant => {
+            newLi = document.createElement('li');
+            newLi.textContent = restaurant
+            restaurantListDivUL.appendChild(newLi)
+
+        })
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 getRestaurants()
