@@ -69,7 +69,7 @@ async function getEvents() {
             let result = (await response.json())
             let data = result["_embedded"]["events"]
             
-            for (i = 0; i <= data.length; i++) {
+            for (i = 0; i < data.length; i++) {
                 let eventData = data[i]["name"];
                 fetchedEvents.push(eventData);
                 let newLi = document.createElement('li');
