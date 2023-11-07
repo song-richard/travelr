@@ -8,7 +8,7 @@ let currentWeatherStatusDiv = document.querySelector('#currentWeatherStatusDiv')
 let openWeatherApiKey = "8a9b986776d2999e3580193c86a5744c"
 let lat = "34.073334"
 let lon = "-118.027496"
-let inputtedCity = "El Monte"
+let inputtedCity = "New York"
 let findLatLongUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${inputtedCity}&appid=${openWeatherApiKey}`
 
 async function latLongApi() {
@@ -31,7 +31,7 @@ async function latLongApi() {
     }
 }
 
-// latLongApi()
+latLongApi()
 
 
 async function getWeather() {
@@ -46,7 +46,7 @@ async function getWeather() {
             currentCityDiv.textContent = `City: ${currentCity}`
             currentTempDiv.textContent = `Current Temperature: ${currentTemperature}F`
             currentWeatherStatusDiv.textContent = `Status: ${currentWeather}`
-            console.log(currentCity)
+            // console.log(currentCity)
         }
     } catch (err) {
         console.log(err)
@@ -56,7 +56,7 @@ async function getWeather() {
 // -----------------END openWeather API-------------------
 
 let ticketMasterApiKey = "SGU2gyci9kgPhW35MA8NlejLs92Z4EM4"
-let city = "El Monte"
+let city = "New York"
 
 async function getEvents() {
     let ticketMasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=5&apikey=${ticketMasterApiKey}&city=$Seattle`
@@ -66,17 +66,20 @@ async function getEvents() {
         if (response.ok) {
             let data = (await response.json())
             console.log(data["_embedded"]["events"])
+
         }
     } catch (err) {
         console.log(err)
     }
 }
 
-// getEvents()
+getEvents()
 
 // -----------------END TicketMaster API-------------------
 
-let fetchedRestaurantNames = [];
+//Used sample values in an effort to reduce the amount of API calls used
+//Remember to empty out the fetchedRestaurantNames array before deployment
+let fetchedRestaurantNames = ["Test", "King Taco", "Burger King"];
 
 async function getRestaurants() {
     let restaurantListDivUL = document.querySelector('#restaurantList')
@@ -108,5 +111,7 @@ async function getRestaurants() {
     }
 }
 
-getRestaurants()
-console.log(fetchedRestaurantNames)
+// getRestaurants()
+// console.log(fetchedRestaurantNames)
+
+// -----------------END Restaurants API-------------------
