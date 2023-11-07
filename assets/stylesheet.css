@@ -29,3 +29,7 @@ body {
         background-position: 0% 50%;
     }
 }
+
+#restaurantSection, #weatherSection {
+    border: solid 2px black;
+}
