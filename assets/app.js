@@ -8,7 +8,7 @@ let currentWeatherStatusDiv = document.querySelector('#currentWeatherStatusDiv')
 let openWeatherApiKey = "8a9b986776d2999e3580193c86a5744c"
 let lat = "34.073334"
 let lon = "-118.027496"
-let inputtedCity = "New York"
+let inputtedCity = "Seattle"
 let findLatLongUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${inputtedCity}&appid=${openWeatherApiKey}`
 
 async function latLongApi() {
@@ -55,8 +55,10 @@ async function getWeather() {
 
 // -----------------END openWeather API-------------------
 
-let ticketMasterApiKey = "SGU2gyci9kgPhW35MA8NlejLs92Z4EM4"
-let city = "New York"
+let ticketMasterApiKey = "SGU2gyci9kgPhW35MA8NlejLs92Z4EM4";
+let city = "New York";
+let fetchedEvents = [];
+let eventsListUL = document.querySelector('#eventsList')
 
 async function getEvents() {
     let ticketMasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=5&apikey=${ticketMasterApiKey}&city=$Seattle`
@@ -64,26 +66,34 @@ async function getEvents() {
         let response = await fetch(ticketMasterUrl);
 
         if (response.ok) {
-            let data = (await response.json())
-            console.log(data["_embedded"]["events"])
-
+            let result = (await response.json())
+            let data = result["_embedded"]["events"]
+            
+            for (i = 0; i <= data.length; i++) {
+                let eventData = data[i]["name"];
+                fetchedEvents.push(eventData);
+                let newLi = document.createElement('li');
+                newLi.textContent = fetchedEvents[i];
+                eventsListUL.appendChild(newLi)
+            }
         }
     } catch (err) {
         console.log(err)
     }
 }
 
+console.log(fetchedEvents)
 getEvents()
 
 // -----------------END TicketMaster API-------------------
 
 //Used sample values in an effort to reduce the amount of API calls used
 //Remember to empty out the fetchedRestaurantNames array before deployment
-let fetchedRestaurantNames = ["Test", "King Taco", "Burger King"];
+let fetchedRestaurantNames = [];
 
 async function getRestaurants() {
     let restaurantListDivUL = document.querySelector('#restaurantList')
-    const url = 'https://restaurants-near-me-usa.p.rapidapi.com/restaurants/location/state/MI/city/West%20Bloomfield/0';
+    const url = 'https://restaurants-near-me-usa.p.rapidapi.com/restaurants/location/state/WA/city/Seattle/0';
     const options = {
         method: 'GET',
         headers: {
