@@ -125,3 +125,20 @@ async function getRestaurants() {
 // console.log(fetchedRestaurantNames)
 
 // -----------------END Restaurants API-------------------
+
+const url = 'https://hotels4.p.rapidapi.com/locations/v3/search?q=el%20monte&locale=en_US&langid=1033&siteid=300000001';
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '2533ec1a1amshf6c5a3c72a4243ap124946jsn68c2d2fed973',
+		'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
+	}
+};
+
+try {
+	const response = await fetch(url, options);
+	const result = await response.text();
+	console.log(result);
+} catch (error) {
+	console.error(error);
+}
