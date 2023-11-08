@@ -34,7 +34,7 @@ body {
     border: solid 2px black;
 }
 
-#cityInputForm, #cityInput, #cityInput-Btn {
+#cityInputForm, #cityInput, #stateInput, #cityInput-Btn {
     padding: 10px;
     background-color: #326b5d;
 }

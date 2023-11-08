@@ -4,9 +4,12 @@ let currentCityDiv = document.querySelector(`#currentCityDiv`);
 let currentTempDiv = document.querySelector('#currentTempDiv');
 let currentWeatherStatusDiv = document.querySelector('#currentWeatherStatusDiv');
 let userInput = document.querySelector('#cityInput');
+let stateInput = document.querySelector('#stateInput')
 let userInputBtn = document.querySelector('#cityInput-Btn');
 
 let requestedCity = "";
+let requestedState = "";
+
 
 let openWeatherApiKey = "8a9b986776d2999e3580193c86a5744c";
 let lat = "34.073334";
@@ -48,7 +51,6 @@ async function getWeather() {
             currentCityDiv.textContent = `City: ${currentCity}`;
             currentTempDiv.textContent = `Current Temperature: ${currentTemperature}F`;
             currentWeatherStatusDiv.textContent = `Status: ${currentWeather}`;
-            // console.log(currentCity)
         }
     } catch (err) {
         console.log(err);
@@ -62,7 +64,8 @@ let fetchedEvents = [];
 let eventsListUL = document.querySelector('#eventsList');
 
 async function getEvents() {
-    let ticketMasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=5&apikey=${ticketMasterApiKey}&city=$${requestedCity}`;
+    const formattedCity = formatCity(requestedCity)
+    let ticketMasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=5&apikey=${ticketMasterApiKey}&city=$${formattedCity}`;
     try {
         let response = await fetch(ticketMasterUrl);
 
@@ -83,18 +86,22 @@ async function getEvents() {
     };
 };
 
-// console.log(fetchedEvents);
-// getEvents();
-
 // -----------------END TicketMaster API-------------------
 
-//Used sample values in an effort to reduce the amount of API calls used
-//Remember to empty out the fetchedRestaurantNames array before deployment
+function formatCity(cityName) {
+    if (cityName.includes(' ')) {
+      return cityName.replace(/\s/g, '%20');
+    } else {
+      return cityName;
+    }
+  }
+
 let fetchedRestaurantNames = [];
 
 async function getRestaurants() {
+    const formattedCity = await formatCity(requestedCity)
     let restaurantListDivUL = document.querySelector('#restaurantList')
-    const url = 'https://restaurants-near-me-usa.p.rapidapi.com/restaurants/location/state/WA/city/Seattle/0';
+    const url = `https://restaurants-near-me-usa.p.rapidapi.com/restaurants/location/state/${requestedState}/city/${formattedCity}/0`;
     const options = {
         method: 'GET',
         headers: {
@@ -131,7 +138,6 @@ let hotelUL = document.querySelector('#hotelsList');
 
 const hotels = [];
 
-const url = 'https://hotels4.p.rapidapi.com/locations/v3/search?q=el%20monte&locale=en_US&langid=1033&siteid=300000001';
 const options = {
 	method: 'GET',
 	headers: {
@@ -142,6 +148,9 @@ const options = {
 
 
 async function getHotels() {
+    const formattedCity = formatCity(requestedCity)
+    const url = `https://hotels4.p.rapidapi.com/locations/v3/search?q=${formattedCity}&locale=en_US&langid=1033&siteid=300000001`;
+
     try {
         const response = await fetch(url, options);
         const result = await response.json();
@@ -161,17 +170,19 @@ async function getHotels() {
     }
 }
 
-getHotels();
-
 //--------------------------
 
 document.addEventListener('DOMContentLoaded', function() {
     userInputBtn.addEventListener('click', function(e) {
         e.preventDefault()
         requestedCity = userInput.value;
+        requestedState = stateInput.value
+
         console.log(requestedCity);
         latLongApi();
         getEvents();
+        getHotels();
+        getRestaurants();
     })
 })
 
