@@ -3,15 +3,18 @@
 let currentCityDiv = document.querySelector(`#currentCityDiv`);
 let currentTempDiv = document.querySelector('#currentTempDiv');
 let currentWeatherStatusDiv = document.querySelector('#currentWeatherStatusDiv');
+let userInput = document.querySelector('#cityInput');
+let userInputBtn = document.querySelector('#cityInput-Btn');
 
+let requestedCity = "";
 
 let openWeatherApiKey = "8a9b986776d2999e3580193c86a5744c";
 let lat = "34.073334";
 let lon = "-118.027496";
-let inputtedCity = "Seattle";
-let findLatLongUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${inputtedCity}&appid=${openWeatherApiKey}`;
+let inputtedCity = "";
 
 async function latLongApi() {
+    let findLatLongUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${requestedCity}&appid=${openWeatherApiKey}`;
     let response = await fetch(findLatLongUrl)
     try {
         if (response.ok) {
@@ -31,7 +34,6 @@ async function latLongApi() {
     };
 };
 
-latLongApi();
 
 
 async function getWeather() {
@@ -56,12 +58,11 @@ async function getWeather() {
 // -----------------END openWeather API-------------------
 
 let ticketMasterApiKey = "SGU2gyci9kgPhW35MA8NlejLs92Z4EM4";
-let city = "New York";
 let fetchedEvents = [];
 let eventsListUL = document.querySelector('#eventsList');
 
 async function getEvents() {
-    let ticketMasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=5&apikey=${ticketMasterApiKey}&city=$Seattle`;
+    let ticketMasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=5&apikey=${ticketMasterApiKey}&city=$${requestedCity}`;
     try {
         let response = await fetch(ticketMasterUrl);
 
@@ -83,7 +84,7 @@ async function getEvents() {
 };
 
 // console.log(fetchedEvents);
-getEvents();
+// getEvents();
 
 // -----------------END TicketMaster API-------------------
 
@@ -161,3 +162,16 @@ async function getHotels() {
 }
 
 getHotels();
+
+//--------------------------
+
+document.addEventListener('DOMContentLoaded', function() {
+    userInputBtn.addEventListener('click', function(e) {
+        e.preventDefault()
+        requestedCity = userInput.value;
+        console.log(requestedCity);
+        latLongApi();
+        getEvents();
+    })
+})
+
