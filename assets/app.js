@@ -145,8 +145,8 @@ async function getHotels() {
         const response = await fetch(url, options);
         const result = await response.json();
         result.sr.forEach(item => {
-            if (item['@type'] === 'gaiaHotelResult') {
-                hotels.push(item.regionNames.shortName)
+            if (item["@type"] === "gaiaHotelResult") {
+                hotels.push(item.regionNames.shortName);
             }
         })
         hotels.forEach(hotel => {
@@ -154,7 +154,7 @@ async function getHotels() {
             newLi.textContent = hotel;
             hotelUL.appendChild(newLi)
         })
-        console.log(hotels)
+        // console.log(hotels)
     } catch (error) {
         console.error(error);
     }
