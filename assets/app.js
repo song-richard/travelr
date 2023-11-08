@@ -82,7 +82,7 @@ async function getEvents() {
     }
 }
 
-console.log(fetchedEvents)
+// console.log(fetchedEvents)
 getEvents()
 
 // -----------------END TicketMaster API-------------------
@@ -126,6 +126,10 @@ async function getRestaurants() {
 
 // -----------------END Restaurants API-------------------
 
+let hotelUL = document.querySelector('#hotelsList')
+
+const hotels = []
+
 const url = 'https://hotels4.p.rapidapi.com/locations/v3/search?q=el%20monte&locale=en_US&langid=1033&siteid=300000001';
 const options = {
 	method: 'GET',
@@ -135,10 +139,25 @@ const options = {
 	}
 };
 
-try {
-	const response = await fetch(url, options);
-	const result = await response.text();
-	console.log(result);
-} catch (error) {
-	console.error(error);
+
+async function getHotels() {
+    try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        result.sr.forEach(item => {
+            if (item['@type'] === 'gaiaHotelResult') {
+                hotels.push(item.regionNames.shortName)
+            }
+        })
+        hotels.forEach(hotel => {
+            newLi = document.createElement('li');
+            newLi.textContent = hotel;
+            hotelUL.appendChild(newLi)
+        })
+        console.log(hotels)
+    } catch (error) {
+        console.error(error);
+    }
 }
+
+getHotels()
