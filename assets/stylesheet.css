@@ -11,7 +11,7 @@ body, html {
 
     /* Background color gradient effect */
 body {
-    background: linear-gradient(-45deg, #64baa4, #19e2db, #01e0f4, #98f0f7, rgb(71, 154, 180));
+    background: linear-gradient(-45deg, #326b5d, #2d7270, #0f6068, #073c3f, rgb(26, 69, 83));
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
 
@@ -30,6 +30,11 @@ body {
     }
 }
 
-#restaurantSection, #weatherSection {
+#restaurantSection, #weatherSection, #hotelsSection, #eventsSection {
     border: solid 2px black;
+}
+
+#cityInputForm, #cityInput, #cityInput-Btn {
+    padding: 10px;
+    background-color: #326b5d;
 }
