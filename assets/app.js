@@ -10,11 +10,9 @@ let userInputBtn = document.querySelector('#cityInput-Btn');
 let requestedCity = "";
 let requestedState = "";
 
-
 let openWeatherApiKey = "8a9b986776d2999e3580193c86a5744c";
 let lat = "34.073334";
 let lon = "-118.027496";
-let inputtedCity = "";
 
 async function latLongApi() {
     let findLatLongUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${requestedCity}&appid=${openWeatherApiKey}`;
@@ -36,8 +34,6 @@ async function latLongApi() {
         console.log(err)
     };
 };
-
-
 
 async function getWeather() {
     let getWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${openWeatherApiKey}&units=imperial`;
@@ -129,9 +125,6 @@ async function getRestaurants() {
     }
 }
 
-// getRestaurants()
-// console.log(fetchedRestaurantNames)
-
 // -----------------END Restaurants API-------------------
 
 let hotelUL = document.querySelector('#hotelsList');
@@ -164,25 +157,21 @@ async function getHotels() {
             newLi.textContent = hotel;
             hotelUL.appendChild(newLi);
         })
-        // console.log(hotels)
     } catch (error) {
         console.error(error);
     }
 }
 
-//--------------------------
+// -----------------END Hotels API-------------------
 
 document.addEventListener('DOMContentLoaded', function() {
     userInputBtn.addEventListener('click', function(e) {
         e.preventDefault()
         requestedCity = userInput.value;
         requestedState = stateInput.value
-
-        console.log(requestedCity);
         latLongApi();
         getEvents();
         getHotels();
-        getRestaurants();
+        // getRestaurants();
     })
 })
-
