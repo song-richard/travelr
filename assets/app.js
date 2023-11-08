@@ -58,12 +58,11 @@ async function getWeather() {
 // -----------------END openWeather API-------------------
 
 let ticketMasterApiKey = "SGU2gyci9kgPhW35MA8NlejLs92Z4EM4";
-let city = "New York";
 let fetchedEvents = [];
 let eventsListUL = document.querySelector('#eventsList');
 
 async function getEvents() {
-    let ticketMasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=5&apikey=${ticketMasterApiKey}&city=$Seattle`;
+    let ticketMasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=5&apikey=${ticketMasterApiKey}&city=$${requestedCity}`;
     try {
         let response = await fetch(ticketMasterUrl);
 
@@ -85,7 +84,7 @@ async function getEvents() {
 };
 
 // console.log(fetchedEvents);
-getEvents();
+// getEvents();
 
 // -----------------END TicketMaster API-------------------
 
@@ -172,6 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
         requestedCity = userInput.value;
         console.log(requestedCity);
         latLongApi();
+        getEvents();
     })
 })
 
