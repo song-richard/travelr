@@ -20,14 +20,13 @@ async function latLongApi() {
     try {
         if (response.ok) {
             let data = await response.json();
-            let fetchedLat = data[0]["lat"]
-            let fetchedLon = data[0]["lon"]
-            lat = fetchedLat
-            lon = fetchedLon
-            getWeather()
-            // console.log(data)
+            let fetchedLat = data[0]["lat"];
+            let fetchedLon = data[0]["lon"];
+            lat = fetchedLat;
+            lon = fetchedLon;
+            getWeather();
         } else {
-            console.log("Response not OK")
+            console.log("Response not OK");
         };
     }
     catch (err) {
@@ -60,7 +59,7 @@ let fetchedEvents = [];
 let eventsListUL = document.querySelector('#eventsList');
 
 async function getEvents() {
-    const formattedCity = formatCity(requestedCity)
+    const formattedCity = formatCity(requestedCity);
     let ticketMasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=5&apikey=${ticketMasterApiKey}&city=$${formattedCity}`;
     try {
         let response = await fetch(ticketMasterUrl);
@@ -95,8 +94,8 @@ function formatCity(cityName) {
 let fetchedRestaurantNames = [];
 
 async function getRestaurants() {
-    const formattedCity = await formatCity(requestedCity)
-    let restaurantListDivUL = document.querySelector('#restaurantList')
+    const formattedCity = await formatCity(requestedCity);
+    let restaurantListDivUL = document.querySelector('#restaurantList');
     const url = `https://restaurants-near-me-usa.p.rapidapi.com/restaurants/location/state/${requestedState}/city/${formattedCity}/0`;
     const options = {
         method: 'GET',
@@ -122,8 +121,8 @@ async function getRestaurants() {
         })
     } catch (error) {
         console.error(error);
-    }
-}
+    };
+};
 
 // -----------------END Restaurants API-------------------
 
@@ -141,7 +140,7 @@ const options = {
 
 
 async function getHotels() {
-    const formattedCity = formatCity(requestedCity)
+    const formattedCity = formatCity(requestedCity);
     const url = `https://hotels4.p.rapidapi.com/locations/v3/search?q=${formattedCity}&locale=en_US&langid=1033&siteid=300000001`;
 
     try {
@@ -166,7 +165,7 @@ async function getHotels() {
 
 document.addEventListener('DOMContentLoaded', function() {
     userInputBtn.addEventListener('click', function(e) {
-        e.preventDefault()
+        e.preventDefault();
         requestedCity = userInput.value;
         requestedState = stateInput.value
         latLongApi();
