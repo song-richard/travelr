@@ -1,3 +1,7 @@
+.transparent-bg {
+    background-color: rgba(255, 255, 255, 0.9); /* Adjust the last value (0.9) for transparency */
+}
+
 body,
 html {
     width: 100%;
@@ -6,33 +10,29 @@ html {
     padding: 0;
     font-family: 'Courier New', Courier, monospace;
     font-size: x-large;
-    /* Comment: Removed 'justify-content' and 'align-items' properties, they are handled by Tailwind CSS */
-    /* Removed 'text-align' as Tailwind CSS will handle text alignment */
+
 }
 
-/* 
-    /* Background color gradient effect */
 body {
     background-color: black;
-    /* background: linear-gradient(-45deg, #33826e, #41ac9c, #126e48, #064b3a, rgb(6, 75, 60));
-    background-size: 400% 400%; */
-    /* animation: gradient 15s ease infinite; */
-
-    /* Comment: Removed 'display', 'flex-direction', 'justify-content', and 'align-items' properties */
+    background: linear-gradient(-45deg, #90afa7, #afd7d1, #7cadbd, #d890c0, rgb(144, 183, 228));
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
 }
 
-*/
-/* @keyframes gradient {
+@keyframes gradient {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
-} */
+}
 
 #restaurantSection,
 #weatherSection,
@@ -46,5 +46,16 @@ body {
 #stateInput,
 #cityInput-Btn {
     padding: 10px;
-    background-color: #326b5d;
+}
+
+/* Adds transparency to specific sections */
+#weatherSection,
+#eventsSection,
+#restaurantSection,
+#hotelsSection,
+#cityInputForm,
+#cityInput-Btn,
+#cityInput,
+#stateInput {
+    background-color: rgba(255, 255, 255, 0.1); 
 }
