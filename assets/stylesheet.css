@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
     width: 100%;
     height: 100%;
     margin: 0;
@@ -9,15 +10,18 @@ body, html {
     /* Removed 'text-align' as Tailwind CSS will handle text alignment */
 }
 
+/* 
     /* Background color gradient effect */
 body {
-    background: linear-gradient(-45deg, #33826e, #41ac9c, #126e48, #064b3a, rgb(6, 75, 60));
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
+    background-color: black;
+    /* background: linear-gradient(-45deg, #33826e, #41ac9c, #126e48, #064b3a, rgb(6, 75, 60));
+    background-size: 400% 400%; */
+    /* animation: gradient 15s ease infinite; */
 
     /* Comment: Removed 'display', 'flex-direction', 'justify-content', and 'align-items' properties */
 }
 
+*/
 /* @keyframes gradient {
     0% {
         background-position: 0% 50%;
@@ -30,11 +34,17 @@ body {
     }
 } */
 
-#restaurantSection, #weatherSection, #hotelsSection, #eventsSection {
+#restaurantSection,
+#weatherSection,
+#hotelsSection,
+#eventsSection {
     border: solid 2px black;
 }
 
-#cityInputForm, #cityInput, #stateInput, #cityInput-Btn {
+#cityInputForm,
+#cityInput,
+#stateInput,
+#cityInput-Btn {
     padding: 10px;
     background-color: #326b5d;
 }
