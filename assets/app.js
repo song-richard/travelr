@@ -34,6 +34,7 @@ async function latLongApi() {
 };
 
 async function getWeather() {
+    let baseUrl;
     if (location.protocol === 'http:') {
         baseUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${openWeatherApiKey}&units=imperial`
     } else {
