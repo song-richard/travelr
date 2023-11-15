@@ -8,33 +8,35 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <section>
-        <form id="cityInputForm">
-            Where are you traveling to?:
-            <label for="cityInput"></label>
-            <input id="cityInput" type="text" placeholder="Enter a city">
-            <input id="stateInput" type="text" placeholder="State">
-            <button id="cityInput-Btn" type="submit">Submit</button>
-        </form>
-    </section>
+    <div class="grid grid-cols-5 gap-5">
+        <section>
+            <form id="cityInputForm">
+                Where are you traveling to?:
+                <label for="cityInput"></label>
+                <input id="cityInput" type="text" placeholder="Enter a city">
+                <input id="stateInput" type="text" placeholder="State">
+                <button id="cityInput-Btn" type="submit">Submit</button>
+            </form>
+        </section>
 
-    <section id="weatherSection">
-        <div id="currentCityDiv">City:</div>
-        <div id="currentTempDiv">Current Temperature:</div>
-        <div id="currentWeatherStatusDiv">Status:</div>
-    </section>
+        <section id="weatherSection">
+            <div id="currentCityDiv">City:</div>
+            <div id="currentTempDiv">Current Temperature:</div>
+            <div id="currentWeatherStatusDiv">Status:</div>
+        </section>
 
-    <section id="eventsSection">Events:
-        <ul id="eventsList"></ul>
-    </section>
+        <section id="eventsSection">Events:
+            <ul id="eventsList"></ul>
+        </section>
 
-    <section id="restaurantSection">Restaurants Near This Location:
-        <ul id="restaurantList"></ul>
-    </section>
+        <section id="restaurantSection">Restaurants Near This Location:
+            <ul id="restaurantList"></ul>
+        </section>
 
-    <section id="hotelsSection">Hotels Near This Location:
-        <ul id="hotelsList"></ul>
-    </section>
+        <section id="hotelsSection">Hotels Near This Location:
+            <ul id="hotelsList"></ul>
+        </section>
+    </div>
 
 <script src="./assets/app.js"></script>
 </body>
