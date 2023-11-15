@@ -1,4 +1,3 @@
-
 // openWeather Query Selectors
 let currentCityDiv = document.querySelector(`#currentCityDiv`);
 let currentTempDiv = document.querySelector('#currentTempDiv');
@@ -30,13 +29,17 @@ async function latLongApi() {
         };
     }
     catch (err) {
-        console.log(err)
+        console.log(err);
     };
 };
 
 async function getWeather() {
-    let getWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${openWeatherApiKey}&units=imperial`;
-    let response = await fetch(getWeatherUrl);
+    if (location.protocol === 'http') {
+        baseUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${openWeatherApiKey}&units=imperial`
+    } else {
+        baseUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${openWeatherApiKey}&units=imperial`
+    };
+    const response = await fetch(baseUrl);
     try {
         if (response.ok) {
             let data = await response.json();
@@ -89,7 +92,7 @@ function formatCity(cityName) {
     } else {
       return cityName;
     }
-  }
+  };
 
 let fetchedRestaurantNames = [];
 
@@ -171,6 +174,6 @@ document.addEventListener('DOMContentLoaded', function() {
         latLongApi();
         getEvents();
         getHotels();
-        // getRestaurants();
+        getRestaurants();
     })
 })
