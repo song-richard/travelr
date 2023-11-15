@@ -18,7 +18,7 @@ body {
     /* Comment: Removed 'display', 'flex-direction', 'justify-content', and 'align-items' properties */
 }
 
-@keyframes gradient {
+/* @keyframes gradient {
     0% {
         background-position: 0% 50%;
     }
@@ -28,7 +28,7 @@ body {
     100% {
         background-position: 0% 50%;
     }
-}
+} */
 
 #restaurantSection, #weatherSection, #hotelsSection, #eventsSection {
     border: solid 2px black;
