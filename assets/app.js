@@ -34,7 +34,7 @@ async function latLongApi() {
 };
 
 async function getWeather() {
-    if (location.protocol === 'http') {
+    if (location.protocol === 'http:') {
         baseUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${openWeatherApiKey}&units=imperial`
     } else {
         baseUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${openWeatherApiKey}&units=imperial`
@@ -174,6 +174,6 @@ document.addEventListener('DOMContentLoaded', function() {
         latLongApi();
         getEvents();
         getHotels();
-        getRestaurants();
+        // getRestaurants();
     })
 })
