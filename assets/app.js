@@ -15,7 +15,7 @@ let lon = "-118.027496";
 
 async function latLongApi() {
     let findLatLongUrl = "";
-    if (location.protocol === 'http:') {
+    if (location.protocol === 'http') {
         findLatLongUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${requestedCity}&appid=${openWeatherApiKey}`
     } else {
         findLatLongUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${requestedCity}&appid=${openWeatherApiKey}`
