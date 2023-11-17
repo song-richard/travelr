@@ -1,4 +1,3 @@
-
 // openWeather Query Selectors
 let currentCityDiv = document.querySelector(`#currentCityDiv`);
 let currentTempDiv = document.querySelector('#currentTempDiv');
@@ -15,7 +14,12 @@ let lat = "34.073334";
 let lon = "-118.027496";
 
 async function latLongApi() {
-    let findLatLongUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${requestedCity}&appid=${openWeatherApiKey}`;
+    let findLatLongUrl = "";
+    if (location.protocol === 'http') {
+        findLatLongUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${requestedCity}&appid=${openWeatherApiKey}`
+    } else {
+        findLatLongUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${requestedCity}&appid=${openWeatherApiKey}`
+    }
     let response = await fetch(findLatLongUrl)
     try {
         if (response.ok) {
@@ -30,13 +34,18 @@ async function latLongApi() {
         };
     }
     catch (err) {
-        console.log(err)
+        console.log(err);
     };
 };
 
 async function getWeather() {
-    let getWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${openWeatherApiKey}&units=imperial`;
-    let response = await fetch(getWeatherUrl);
+    let baseUrl;
+    if (location.protocol === 'http') {
+        baseUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${openWeatherApiKey}&units=imperial`
+    } else {
+        baseUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${openWeatherApiKey}&units=imperial`
+    };
+    const response = await fetch(baseUrl);
     try {
         if (response.ok) {
             let data = await response.json();
@@ -89,7 +98,7 @@ function formatCity(cityName) {
     } else {
       return cityName;
     }
-  }
+  };
 
 let fetchedRestaurantNames = [];
 
@@ -171,6 +180,6 @@ document.addEventListener('DOMContentLoaded', function() {
         latLongApi();
         getEvents();
         getHotels();
-        // getRestaurants();
+        getRestaurants();
     })
 })
