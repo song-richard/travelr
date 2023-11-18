@@ -13,6 +13,7 @@ let openWeatherApiKey = "8a9b986776d2999e3580193c86a5744c";
 let lat = "34.073334";
 let lon = "-118.027496";
 
+//Fetch Lat/Long data from API
 async function latLongApi() {
     let findLatLongUrl = "";
     if (location.protocol === 'http') {
@@ -38,6 +39,7 @@ async function latLongApi() {
     };
 };
 
+//Transfer fetched Lat/Long from latLongApi() to getWeather()'s API fetch
 async function getWeather() {
     let baseUrl;
     if (location.protocol === 'http') {
@@ -67,6 +69,7 @@ let ticketMasterApiKey = "SGU2gyci9kgPhW35MA8NlejLs92Z4EM4";
 let fetchedEvents = [];
 let eventsListUL = document.querySelector('#eventsList');
 
+//Fetch event data from TicketMaster's API based on user's requested city
 async function getEvents() {
     const formattedCity = formatCity(requestedCity);
     let ticketMasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=5&apikey=${ticketMasterApiKey}&city=$${formattedCity}`;
@@ -146,7 +149,6 @@ const options = {
 		'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
 	}
 };
-
 
 async function getHotels() {
     const formattedCity = formatCity(requestedCity);
