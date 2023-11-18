@@ -95,6 +95,7 @@ async function getEvents() {
 
 // -----------------END TicketMaster API-------------------
 
+//Formats the user's requested city into accepted API parameters. Replaced whitespaces with '%20' (e.g, the space between a 2 word city)
 function formatCity(cityName) {
     if (cityName.includes(' ')) {
       return cityName.replace(/\s/g, '%20');
@@ -150,6 +151,7 @@ const options = {
 	}
 };
 
+//Fetch hotel data from hotels API
 async function getHotels() {
     const formattedCity = formatCity(requestedCity);
     const url = `https://hotels4.p.rapidapi.com/locations/v3/search?q=${formattedCity}&locale=en_US&langid=1033&siteid=300000001`;
@@ -174,6 +176,7 @@ async function getHotels() {
 
 // -----------------END Hotels API-------------------
 
+//Button will call the following functions and fetch the requested data
 document.addEventListener('DOMContentLoaded', function() {
     userInputBtn.addEventListener('click', function(e) {
         e.preventDefault();
