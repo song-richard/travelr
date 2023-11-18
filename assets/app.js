@@ -13,6 +13,7 @@ let openWeatherApiKey = "8a9b986776d2999e3580193c86a5744c";
 let lat = "34.073334";
 let lon = "-118.027496";
 
+//Fetch Lat/Long data from API
 async function latLongApi() {
     let findLatLongUrl = "";
     if (location.protocol === 'http') {
@@ -38,6 +39,7 @@ async function latLongApi() {
     };
 };
 
+//Transfer fetched Lat/Long from latLongApi() to getWeather()'s API fetch
 async function getWeather() {
     let baseUrl;
     if (location.protocol === 'http') {
@@ -67,6 +69,7 @@ let ticketMasterApiKey = "SGU2gyci9kgPhW35MA8NlejLs92Z4EM4";
 let fetchedEvents = [];
 let eventsListUL = document.querySelector('#eventsList');
 
+//Fetch event data from TicketMaster's API based on user's requested city
 async function getEvents() {
     const formattedCity = formatCity(requestedCity);
     let ticketMasterUrl = `https://app.ticketmaster.com/discovery/v2/events.json?size=5&apikey=${ticketMasterApiKey}&city=$${formattedCity}`;
@@ -92,6 +95,7 @@ async function getEvents() {
 
 // -----------------END TicketMaster API-------------------
 
+//Formats the user's requested city into accepted API parameters. Replaced whitespaces with '%20' (e.g, the space between a 2 word city)
 function formatCity(cityName) {
     if (cityName.includes(' ')) {
       return cityName.replace(/\s/g, '%20');
@@ -147,7 +151,7 @@ const options = {
 	}
 };
 
-
+//Fetch hotel data from hotels API
 async function getHotels() {
     const formattedCity = formatCity(requestedCity);
     const url = `https://hotels4.p.rapidapi.com/locations/v3/search?q=${formattedCity}&locale=en_US&langid=1033&siteid=300000001`;
@@ -172,6 +176,7 @@ async function getHotels() {
 
 // -----------------END Hotels API-------------------
 
+//Button will call the following functions and fetch the requested data
 document.addEventListener('DOMContentLoaded', function() {
     userInputBtn.addEventListener('click', function(e) {
         e.preventDefault();
